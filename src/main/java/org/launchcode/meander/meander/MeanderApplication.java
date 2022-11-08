@@ -1,13 +1,13 @@
-package org.launchcode.tripproject;
+package org.launchcode.meander.meander;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class TravelBloggerProjectApplication {
+public class MeanderApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(TravelBloggerProjectApplication.class, args);
+		SpringApplication.run(MeanderApplication.class, args);
 	}
 
 }
