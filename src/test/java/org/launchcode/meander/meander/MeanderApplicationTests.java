@@ -9,5 +9,4 @@ class MeanderApplicationTests {
 	@Test
 	void contextLoads() {
 	}
-
 }
