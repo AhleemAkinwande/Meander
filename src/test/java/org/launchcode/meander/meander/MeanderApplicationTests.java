@@ -1,13 +1,12 @@
-package org.launchcode.tripproject;
+package org.launchcode.meander.meander;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class TravelBloggerProjectApplicationTests {
+class MeanderApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
-
+    @Test
+    void contextLoads() {
+    }
 }
