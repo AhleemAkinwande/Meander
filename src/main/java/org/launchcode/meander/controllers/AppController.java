@@ -1,7 +1,7 @@
 package org.launchcode.meander.controllers;
 
 import org.launchcode.meander.models.User;
-import org.launchcode.meander.models.data.UserRepository;
+import org.launchcode.meander.data.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;

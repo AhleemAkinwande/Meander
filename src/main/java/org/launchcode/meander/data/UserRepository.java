@@ -1,4 +1,4 @@
-package org.launchcode.meander.models.data;
+package org.launchcode.meander.data;
 
 import org.launchcode.meander.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;

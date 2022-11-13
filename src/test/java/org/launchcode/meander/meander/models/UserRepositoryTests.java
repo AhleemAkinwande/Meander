@@ -2,7 +2,7 @@ package org.launchcode.meander.meander.models;
 
 import org.junit.jupiter.api.Test;
 import org.launchcode.meander.models.User;
-import org.launchcode.meander.models.data.UserRepository;
+import org.launchcode.meander.data.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
