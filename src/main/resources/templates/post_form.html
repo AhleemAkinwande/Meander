@@ -14,12 +14,12 @@
       <h1>Create a Post</h1>
    </div>
    <form method="post" style="max-width: 600px; margin: 0 auto;"
-         th:action="@{/process_post}" th:object="${user}">
+         th:action="@{/processPost}" th:object="${post}">
       <div class="m-3">
          <div class="form-group row">
             <label class="col-4 col-form-label">Title: </label>
             <div class="col-8">
-               <input class="form-control" required th:field="${post-title}" type="post-title"/>
+               <input class="form-control" required th:field="${post.title}" type="text"/>
             </div>
          </div>
 
@@ -27,13 +27,12 @@
             <label class="col-4 col-form-label">Post: </label>
             <div class="col-8">
                <input class="form-control"
-                      required th:field="${post}" type="post"/>
+                      required th:field="${post.text}" type="text"/>
             </div>
          </div>
 
          <div>
-            <button class="btn btn-primary" type="edit">Edit</button>
-            <button class="btn btn-primary" type="delete">Delete</button>
+            <button class="btn btn-primary" type="submit">Create</button>
          </div>
       </div>
    </form>

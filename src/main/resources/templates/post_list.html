@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
    <meta charset="ISO-8859-1">
-   <title>List Users</title>
+   <title>List of Posts</title>
 
    <link rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
    <link rel="stylesheet" th:href="@{/css/meander.css}"/>
@@ -11,14 +11,6 @@
 </head>
 <body>
 <div class="container text-center">
-   <div>
-      <form method="post" th:action="@{/logout}">
-         <p>
-            Welcome <b>[[${#request.userPrincipal.principal.fullName}]]</b>
-         </p>
-         <input type="submit" value="Sign Out"/>
-      </form>
-   </div>
    <div>
       <h1>List of Posts</h1>
    </div>
