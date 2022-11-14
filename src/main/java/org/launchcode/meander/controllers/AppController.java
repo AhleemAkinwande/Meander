@@ -17,7 +17,8 @@ public class AppController {
     private UserRepository userRepo;
 
     @GetMapping("")
-    public String viewHomePage() {
+    public String viewHomePage(Model model) {
+        model.addAttribute("title", "Welcome to Meander");
         return "index";
     }
 
