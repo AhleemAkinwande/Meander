@@ -26,9 +26,9 @@ public class Post {
 //    private User user;
 
 
-    public Post(String title, String postDetails) {
+    public Post(String title, String text) {
         this.title = title;
-        text = postDetails;
+        this.text = text;
     }
 
     public Post() {}
