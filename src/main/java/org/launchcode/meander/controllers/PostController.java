@@ -42,7 +42,7 @@ public class PostController {
     }
 
     @PostMapping("create")
-    public String processPost(@RequestParam String postTitle, @RequestParam String text,
+    public String processPost(@RequestParam String title, @RequestParam String text,
                               @ModelAttribute @Valid Post post, Errors errors, Model model){
 
         if(errors.hasErrors()){
@@ -50,7 +50,7 @@ public class PostController {
             model.addAttribute(post);
             return "post_form";
         }
-        post = new Post(postTitle, text);
+        post = new Post(title, text);
         postRepository.save(post);
         return "post_list";
     }
