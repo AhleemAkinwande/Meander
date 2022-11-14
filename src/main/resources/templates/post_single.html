@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Single Post</title>
+
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
+    <link rel="stylesheet" th:href="@{/css/meander.css}"/>
+
+    <script th:src="@{/js/bootstrap.js}" type="text/javascript"></script>
+</head>
+<body>
+<div class="container text-center">
+
+    <div>
+        <h2 th:text="${post.title}"></h2>
+        <p th:text="${post.text}"></p>
+        <button class="btn btn-primary" type="edit">Edit</button>
+        <button class="btn btn-primary" type="delete">Delete</button>
+    </div>
+</div>
+</body>
+</html>
