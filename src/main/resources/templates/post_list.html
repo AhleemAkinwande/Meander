@@ -25,7 +25,7 @@
          </thead>
          <tbody>
          <tr th:each="post: ${posts}">
-            <td th:text="${post.title}"></td>
+            <td><a th:href="@{'post_single/' + ${post.id}}" th:text="${post.title}"></a></td>
             <td th:text="${post.text}"></td>
          </tr>
          </tbody>

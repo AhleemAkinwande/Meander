@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("post")
@@ -27,11 +28,18 @@ public class PostController {
         return "post_list";
     }
 
-    @GetMapping("singlePost")
-    public String displayASinglePost(@RequestParam Integer postId,Model model){
-        model.addAttribute("title", "Single post");
-        model.addAttribute("post", postRepository.findById(postId));
-        return "single_post";
+    @GetMapping("post_single/{postId}")
+    public String displayASinglePost(Model model, @PathVariable Integer postId){
+
+        Optional optPost = postRepository.findById(postId);
+        if (!optPost.isEmpty()) {
+            Post post = (Post) optPost.get();
+            model.addAttribute("post", post);
+            model.addAttribute("title", "Single post");
+            return "post_single";
+        } else {
+            return "redirect:/";
+        }
     }
 
     @GetMapping("create")
@@ -52,7 +60,7 @@ public class PostController {
         }
         post = new Post(title, text);
         postRepository.save(post);
-        return "post_list";
+        return "redirect:post_list";
     }
 
     @PostMapping("delete")

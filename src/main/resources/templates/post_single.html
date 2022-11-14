@@ -11,18 +11,10 @@
 </head>
 <body>
 <div class="container text-center">
-    <div>
-        <form method="post" th:action="@{/logout}">
-            <p>
-                Welcome <b>[[${#request.userPrincipal.principal.fullName}]]</b>
-            </p>
-            <input type="submit" value="Sign Out"/>
-        </form>
-    </div>
 
     <div>
         <h2 th:text="${post.title}"></h2>
-        <p th:text="$post.text}"></p>
+        <p th:text="${post.text}"></p>
         <button class="btn btn-primary" type="edit">Edit</button>
         <button class="btn btn-primary" type="delete">Delete</button>
     </div>
