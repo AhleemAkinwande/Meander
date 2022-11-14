@@ -29,6 +29,10 @@ font-family: var(--primaryFont);
 font-weight: 300;
 }
 
+a {
+text-decoration: none !important;
+}
+
 body::after {
     content: '';
     position: absolute;
@@ -39,4 +43,12 @@ body::after {
     right: 0;
     z-index: -1;
     opacity: .4;
+}
+
+.fadein {
+animation: .5s fadein ease;
+}
+
+@keyframes fadein {
+from { opacity: 0 } to { opacity: 1 }
 }
