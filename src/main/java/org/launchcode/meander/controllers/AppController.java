@@ -22,8 +22,15 @@ public class AppController {
         return "index";
     }
 
+    @GetMapping("/login")
+    public String loginIn(Model model) {
+        model.addAttribute("title", "Log in");
+        return "login";
+    }
+
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
+        model.addAttribute("title", "Become a Meanderer");
         model.addAttribute("user", new User());
 
         return "signup_form";
@@ -42,6 +49,7 @@ public class AppController {
 
     @GetMapping("/users")
     public String listUsers(Model model) {
+        model.addAttribute("title", "View all users");
         List<User> users = userRepo.findAll();
         model.addAttribute("users", users);
 
