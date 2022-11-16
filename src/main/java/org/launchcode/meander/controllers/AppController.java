@@ -28,13 +28,7 @@ public class AppController {
         return "login";
     }
 
-    @GetMapping("/register")
-    public String showRegistrationForm(Model model) {
-        model.addAttribute("title", "Become a Meanderer");
-        model.addAttribute("user", new User());
 
-        return "signup_form";
-    }
 
     @PostMapping("/process_register")
     public String processRegister(User user) {
