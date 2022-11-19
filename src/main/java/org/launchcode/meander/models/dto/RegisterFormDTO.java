@@ -8,6 +8,8 @@ public class RegisterFormDTO extends LoginFormDTO {
         return verifyPassword;
     }
 
+
+
     public void setVerifyPassword(String verifyPassword) {
         this.verifyPassword = verifyPassword;
     }
