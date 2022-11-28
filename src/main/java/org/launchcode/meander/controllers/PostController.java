@@ -1,17 +1,19 @@
 package org.launchcode.meander.controllers;
 
+import org.launchcode.meander.models.ImageUploadModel;
 import org.launchcode.meander.models.data.PostRepository;
 import org.launchcode.meander.models.Post;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.io.IOException;
+import java.util.*;
 
 @Controller
 @RequestMapping("post")
@@ -61,6 +63,35 @@ public class PostController {
         post = new Post(title, text);
         postRepository.save(post);
         return "redirect:post_list";
+    }
+
+    //I created a separate method for uploading the images because I was not sure how to use it with the original "create" method above.
+    @PostMapping(value = {"/upload_image"}, consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+    public Post postImage(@RequestPart("post") Post post,
+                            @RequestPart("imageFile") MultipartFile[] file) {
+
+        try {
+            Set<ImageUploadModel> images = uploadImage(file);
+            post.setPostImages(images);
+            return postRepository.postImage(post);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
+
+    public Set<ImageUploadModel> uploadImage(MultipartFile[] multipartFiles) throws IOException {
+        Set<ImageUploadModel> postImages = new HashSet<>();
+
+        for (MultipartFile file : multipartFiles) {
+            ImageUploadModel imageUploadModel = new ImageUploadModel(
+            file.getOriginalFilename(),
+            file.getContentType(),
+            file.getBytes() // will throw an IOException, the throws IOException above mitigates that and the try catch above also handles that case.
+            );
+            postImages.add(imageUploadModel);
+        }
+        return postImages;
     }
 
     @PostMapping("delete")
