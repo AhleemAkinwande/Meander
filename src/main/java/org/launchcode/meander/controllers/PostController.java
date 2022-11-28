@@ -48,7 +48,7 @@ public class PostController {
     }
 
     @GetMapping("create")
-    public String displayPostForm(Model model){
+    public String displayPostForm(Model model, Integer userId){
         model.addAttribute("title", "Create Post");
         model.addAttribute(new Post());
         model.addAttribute("user", userRepository.findById(userId));
