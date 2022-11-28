@@ -1,7 +1,9 @@
 package org.launchcode.meander.controllers;
 
+import org.launchcode.meander.models.User;
 import org.launchcode.meander.models.data.PostRepository;
 import org.launchcode.meander.models.Post;
+import org.launchcode.meander.models.data.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +21,9 @@ public class PostController {
 
     @Autowired
     private PostRepository postRepository;
+
+    @Autowired
+    UserRepository userRepository;
 
     @GetMapping("post_list")
     public String displayPosts(Model model){
@@ -46,19 +51,22 @@ public class PostController {
     public String displayPostForm(Model model){
         model.addAttribute("title", "Create Post");
         model.addAttribute(new Post());
+        model.addAttribute("user", userRepository.findById(userId));
         return "post_form";
     }
 
     @PostMapping("create")
-    public String processPost(@RequestParam String title, @RequestParam String text,
-                              @ModelAttribute @Valid Post post, Errors errors, Model model){
+    public String processPost(@RequestParam String title, @RequestParam String text, @RequestParam Integer userId, @ModelAttribute @Valid Post post, Errors errors, Model model){
+
+        Optional<User> result = userRepository.findById(userId) ;
+        User user = result.get();
 
         if(errors.hasErrors()){
             model.addAttribute("title", "Create Post");
             model.addAttribute(post);
             return "post_form";
         }
-        post = new Post(title, text);
+        post = new Post(title, text, user);
         postRepository.save(post);
         return "redirect:post_list";
     }

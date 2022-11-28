@@ -1,6 +1,8 @@
 package org.launchcode.meander.models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -20,6 +22,9 @@ public class User {
 
     @Column(name = "last_name", nullable = false, length = 20)
     private String lastName;
+
+    @OneToMany(mappedBy = "user")
+    private final List<Post> posts = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -59,5 +64,9 @@ public class User {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public List<Post> getPosts() {
+        return posts;
     }
 }
