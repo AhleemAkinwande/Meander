@@ -66,19 +66,19 @@ public class PostController {
     }
 
     //I created a separate method for uploading the images because I was not sure how to use it with the original "create" method above.
-    @PostMapping(value = {"/upload_image"}, consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
-    public Post postImage(@RequestPart("post") Post post,
-                            @RequestPart("imageFile") MultipartFile[] file) {
-
-        try {
-            Set<ImageUploadModel> images = uploadImage(file);
-            post.setPostImages(images);
-            return postRepository.postImage(post);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return null;
-        }
-    }
+//    @PostMapping(value = {"/upload_image"}, consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+//    public Post postImage(@RequestPart("post") Post post,
+//                            @RequestPart("imageFile") MultipartFile[] file) {
+//
+//        try {
+//            Set<ImageUploadModel> images = uploadImage(file);
+//            post.setPostImages(images);
+//            return postRepository.postImage(post);
+//        } catch (Exception e) {
+//            System.out.println(e.getMessage());
+//            return null;
+//        }
+//    }
 
     public Set<ImageUploadModel> uploadImage(MultipartFile[] multipartFiles) throws IOException {
         Set<ImageUploadModel> postImages = new HashSet<>();
