@@ -29,11 +29,11 @@
          </tr>
          </thead>
          <tbody>
-         <tr th:each="user: ${users}">
-            <td th:text="${user.id}">User ID</td>
-            <td th:text="${user.email}">E-mail</td>
-            <td th:text="${user.firstName}">First Name</td>
-            <td th:text="${user.lastName}">Last Name</td>
+         <tr>
+            <td >[[${#request.userPrincipal.principal.email}]]</td>
+<!--            <td th:text="${#request.userPrincipal.principal.email}"></td>-->
+<!--            <td th:text="${#request.userPrincipal.principal.firstName}"></td>-->
+<!--            <td th:text="${#request.userPrincipal.principal.lastName}"></td>-->
          </tr>
          </tbody>
       </table>
