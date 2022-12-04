@@ -30,10 +30,10 @@
          </thead>
          <tbody>
          <tr>
-            <td >[[${#request.userPrincipal.principal.email}]]</td>
-<!--            <td th:text="${#request.userPrincipal.principal.email}"></td>-->
-<!--            <td th:text="${#request.userPrincipal.principal.firstName}"></td>-->
-<!--            <td th:text="${#request.userPrincipal.principal.lastName}"></td>-->
+            <td th:text="${user.id}"></td>
+            <td th:text="${user.email}"></td>
+            <td th:text="${user.firstName}"></td>
+            <td th:text="${user.lastName}"></td>
          </tr>
          </tbody>
       </table>
