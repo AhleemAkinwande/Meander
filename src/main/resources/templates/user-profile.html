@@ -19,16 +19,7 @@
    </div>
 
    <div>
-      <table class="table table-striped table-bordered">
-         <thead class="thead-dark">
-         <tr>
-            <th>User ID</th>
-            <th>E-mail</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-         </tr>
-         </thead>
-         <tbody>
+
          <section style="background-color: #eee;">
             <div class="container py-5">
 
@@ -85,6 +76,24 @@
                                  <p class="text-muted mb-0" th:text="${user.location}"></p>
                               </div>
                            </div>
+                           <hr>
+                           <div class="row">
+                              <div class="col-sm-3">
+                                 <p class="mb-0">Facebook</p>
+                              </div>
+                              <div class="col-sm-9">
+                                 <p class="text-muted mb-0"><a th:href="user.facebook">Click Here</a></p>
+                              </div>
+                           </div>
+                           <hr>
+                           <div class="row">
+                              <div class="col-sm-3">
+                                 <p class="mb-0">Instragram</p>
+                              </div>
+                              <div class="col-sm-9">
+                                 <p class="text-muted mb-0"><a th:href="user.instagram">Click Here</a></p>
+                              </div>
+                           </div>
                         </div>
                      </div>
 
@@ -93,8 +102,6 @@
             </div>
          </section>
 
-         </tbody>
-      </table>
    </div>
 </div>
 </body>

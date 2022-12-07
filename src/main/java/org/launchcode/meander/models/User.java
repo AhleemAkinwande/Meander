@@ -27,6 +27,12 @@ public class User {
     @Column(name = "phone", nullable = true, length = 15)
     private String phone;
 
+    @Column(name = "facebook", length = 80)
+    private String facebook;
+
+    @Column(name = "instagram", length = 80)
+    private String instagram;
+
     public int getId() {
         return id;
     }
