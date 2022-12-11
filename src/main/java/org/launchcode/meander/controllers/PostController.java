@@ -5,6 +5,8 @@ import org.launchcode.meander.models.data.PostRepository;
 import org.launchcode.meander.models.Post;
 import org.launchcode.meander.models.data.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -48,22 +50,25 @@ public class PostController {
     }
 
     @GetMapping("create")
-    public String displayPostForm(Model model, Integer userId){
+    public String displayPostForm(Model model){
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User currentUser = userRepository.findByEmail(((UserDetails)principal).getUsername());
+
         model.addAttribute("title", "Create Post");
         model.addAttribute(new Post());
-        model.addAttribute("user", userRepository.findById(userId));
+        model.addAttribute("user", currentUser);
         return "post_form";
     }
 
     @PostMapping("create")
-    public String processPost(@RequestParam String title, @RequestParam String text, @RequestParam Integer userId, @ModelAttribute @Valid Post post, Errors errors, Model model){
+    public String processPost(@RequestParam String title, @RequestParam String text, @RequestParam User user, @ModelAttribute @Valid Post post, Errors errors, Model model){
 
-        Optional<User> result = userRepository.findById(userId) ;
-        User user = result.get();
+
 
         if(errors.hasErrors()){
             model.addAttribute("title", "Create Post");
             model.addAttribute(post);
+            model.addAttribute(user);
             return "post_form";
         }
         post = new Post(title, text, user);
