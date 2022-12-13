@@ -34,4 +34,14 @@ public class ProfileController {
 
         return "user-profile";
     }
+
+    @GetMapping("/user-edit")
+    public String showUserProfileForm(Model model) {
+        model.addAttribute("title", "Edit my profile");
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User currentUser = userRepo.findByEmail(((UserDetails)principal).getUsername());
+        model.addAttribute("user", currentUser);
+
+        return "user-edit";
+    }
 }
