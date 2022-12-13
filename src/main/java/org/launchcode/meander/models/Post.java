@@ -26,18 +26,7 @@ public class Post {
 //    @OneToMany(mappedBy = "post")
 //    private User user;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL) // creates a many-to-one relationship (many post, one user)
-    @JoinTable(name = "Post_Images",
-            joinColumns = {
-            @JoinColumn(name = "Post_Id")
-            },
-            inverseJoinColumns = {
-            @JoinColumn(name = "Image_Id")
-            })
-    private Set<ImageUploadModel> postImages; //binds the ImageUploadModel to the Post model and uses Set to account for if a user would like to upload multiple images for the same post
 
-    public Set<ImageUploadModel> getPostImages() { return postImages; }
-    public void setPostImages(Set<ImageUploadModel> postImages) { this.postImages = postImages; }
 
     public Post(String title, String postDetails) {
         this.title = title;
