@@ -1,6 +1,8 @@
 package org.launchcode.meander.controllers;
 
 import java.security.Principal;
+
+import org.launchcode.meander.models.Post;
 import org.launchcode.meander.models.User;
 import org.launchcode.meander.models.data.UserRepository;
 import org.launchcode.meander.services.CustomUserDetailsService;
@@ -11,10 +13,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
@@ -43,5 +45,31 @@ public class ProfileController {
         model.addAttribute("user", currentUser);
 
         return "user-edit";
+    }
+
+    @PostMapping("/user-edit")
+    public String processPost(@RequestParam String phone, @RequestParam String location,
+                              @RequestParam String facebook, @RequestParam String instagram,
+                              Model model){
+
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User currentUser = userRepo.findByEmail(((UserDetails)principal).getUsername());
+
+        if (phone.length() > 0) {
+            currentUser.setPhone(phone);
+        }
+        if (location.length() > 0) {
+            currentUser.setLocation(location);
+        }
+        if (facebook.length() > 0) {
+            currentUser.setFacebook(facebook);
+        }
+        if (instagram.length() > 0) {
+            currentUser.setInstagram(instagram);
+        }
+
+        userRepo.save(currentUser);
+
+        return "redirect:user-profile";
     }
 }
