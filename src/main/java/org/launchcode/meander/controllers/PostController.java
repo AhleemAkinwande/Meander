@@ -80,19 +80,19 @@ public class PostController {
 //        }
 //    }
 
-    public Set<ImageUploadModel> uploadImage(MultipartFile[] multipartFiles) throws IOException {
-        Set<ImageUploadModel> postImages = new HashSet<>();
-
-        for (MultipartFile file : multipartFiles) {
-            ImageUploadModel imageUploadModel = new ImageUploadModel(
-            file.getOriginalFilename(),
-            file.getContentType(),
-            file.getBytes() // will throw an IOException, the throws IOException above mitigates that and the try catch above also handles that case.
-            );
-            postImages.add(imageUploadModel);
-        }
-        return postImages;
-    }
+//    public Set<ImageUploadModel> uploadImage(MultipartFile[] multipartFiles) throws IOException {
+//        Set<ImageUploadModel> postImages = new HashSet<>();
+//
+//        for (MultipartFile file : multipartFiles) {
+//            ImageUploadModel imageUploadModel = new ImageUploadModel(
+//            file.getOriginalFilename(),
+//            file.getContentType(),
+//            file.getBytes() // will throw an IOException, the throws IOException above mitigates that and the try catch above also handles that case.
+//            );
+//            postImages.add(imageUploadModel);
+//        }
+//        return postImages;
+//    }
 
     @PostMapping("delete")
     public String renderDeleteEventForm(@RequestParam(required = false) int[] postId){
