@@ -1,13 +1,15 @@
 package org.launchcode.meander.models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
     @Column(nullable = false, unique = true, length = 45)
     private String email;
@@ -21,14 +23,20 @@ public class User {
     @Column(name = "last_name", nullable = false, length = 20)
     private String lastName;
 
-    public Long getId() {
+    @OneToMany(mappedBy="user")
+    private final List<Post> posts = new ArrayList<>();
+
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
+    public List<Post> getPosts() {
+        return posts;
+    }
     public String getEmail() {
         return email;
     }

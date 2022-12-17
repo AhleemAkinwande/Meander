@@ -7,7 +7,7 @@
 <nav th:replace="fragments :: navbar"></nav>
 <div class="container text-center">
    <div>
-      <h1>Create a Post</h1>
+      <h1 th:text="${title}"></h1>
    </div>
    <form method="post" style="max-width: 600px; margin: 0 auto;"
          th:action="@{/post/create}" th:object="${post}">
@@ -24,9 +24,12 @@
             <div class="col-8">
                <input class="form-control"
                       required th:field="${post.text}" name="text" type="text"/>
+                <input type="hidden" th:field="*{user}"/>
+
             </div>
          </div>
-
+     <p class="error" th:errors="${post.title}"></p>
+         <p class="error" th:errors="${post.text}"></p>
          <div>
             <button class="btn btn-primary" type="submit">Create</button>
          </div>
