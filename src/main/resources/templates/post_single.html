@@ -10,8 +10,8 @@
     <div>
         <h2 th:text="${post.title}"></h2>
         <p th:text="${post.text}"></p>
-        <button class="btn btn-primary" type="edit">Edit</button>
-        <button class="btn btn-primary" type="delete">Delete</button>
+        <a class="btn btn-primary" type="edit">Edit</a>
+        <a th:href="@{'/post/delete?postId=' + ${post.id}}" class="btn btn-primary" type="delete">Delete</a>
     </div>
 </div>
 </body>

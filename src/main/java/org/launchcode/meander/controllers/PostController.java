@@ -60,6 +60,12 @@ public class PostController {
         }
     }
 
+    @GetMapping("delete")
+    public String deletePost(Model model, @RequestParam(required = true) Integer postId) {
+        postRepository.deleteById(postId);
+        return "redirect:post_list";
+    }
+
     @GetMapping("create")
     public String displayPostForm(Model model){
         model.addAttribute("title", "Create Post");
