@@ -21,6 +21,18 @@ public class User {
     @Column(name = "last_name", nullable = false, length = 20)
     private String lastName;
 
+    @Column(name = "location", nullable = true, length = 100)
+    private String location;
+
+    @Column(name = "phone", nullable = true, length = 15)
+    private String phone;
+
+    @Column(name = "facebook", length = 80)
+    private String facebook;
+
+    @Column(name = "instagram", length = 80)
+    private String instagram;
+
     public Long getId() {
         return id;
     }
@@ -59,5 +71,37 @@ public class User {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getFacebook() {
+        return facebook;
+    }
+
+    public void setFacebook(String facebook) {
+        this.facebook = facebook;
+    }
+
+    public String getInstagram() {
+        return instagram;
+    }
+
+    public void setInstagram(String instagram) {
+        this.instagram = instagram;
     }
 }
