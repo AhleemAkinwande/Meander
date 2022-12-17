@@ -28,27 +28,27 @@ public class PostController {
 
     @GetMapping("post_list")
 
-    public String displayPosts(@RequestParam(required=false) Integer userId, Model model){
+    public String displayPosts(@RequestParam(required = false) Integer userId, Model model) {
 
-        if(userId == null) {
+        if (userId == null) {
             model.addAttribute("title", "All posts");
             List<Post> posts = (List<Post>) postRepository.findAll();
             model.addAttribute("posts", posts);
         } else {
-          Optional<User> result = userRepository.findById(userId);
-          if(result.isEmpty()) {
-              model.addAttribute("title", "Invalid user ID.");
-          } else {
-             User user = result.get();
-              model.addAttribute("title", "Posts by: " + user.getFirstName() + " " + user.getLastName());
-              model.addAttribute("posts", user.getPosts());
-          }
+            Optional<User> result = userRepository.findById(userId);
+            if (result.isEmpty()) {
+                model.addAttribute("title", "Invalid user ID.");
+            } else {
+                User user = result.get();
+                model.addAttribute("title", "Posts by: " + user.getFirstName() + " " + user.getLastName());
+                model.addAttribute("posts", user.getPosts());
+            }
         }
         return "post_list";
     }
 
     @GetMapping("post_single/{postId}")
-    public String displayASinglePost(Model model, @PathVariable Integer postId){
+    public String displayASinglePost(Model model, @PathVariable Integer postId) {
 
         Optional optPost = postRepository.findById(postId);
         if (!optPost.isEmpty()) {
@@ -61,12 +61,19 @@ public class PostController {
         }
     }
 
+    @GetMapping("delete")
+    public String deletePost(Model model, @RequestParam(required = true) Integer postId) {
+        postRepository.deleteById(postId);
+        return "redirect:post_list";
+    }
+
+
     @GetMapping("create")
-    public String displayPostForm(Model model){
+    public String displayPostForm(Model model) {
         model.addAttribute("title", "Create Post");
 
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User currentUser = userRepository.findByEmail(((UserDetails)principal).getUsername());
+        User currentUser = userRepository.findByEmail(((UserDetails) principal).getUsername());
 
         Post post = new Post();
         post.setUser(currentUser);
@@ -77,7 +84,7 @@ public class PostController {
     }
 
     @PostMapping("create")
-    public String processPost(@ModelAttribute @Valid Post post, Errors errors, Model model){
+    public String processPost(@ModelAttribute @Valid Post post, Errors errors, Model model) {
 
         if(errors.hasErrors()) {
             model.addAttribute("title", "Failed to create post, please try again!");
