@@ -11,7 +11,7 @@
         <h2 th:text="${post.title}"></h2>
         <p th:text="${post.text}"></p>
         <a class="btn btn-primary" type="edit">Edit</a>
-        <a th:href="@{'/post/delete?postId=' + ${post.id}}" class="btn btn-primary" type="delete">Delete</a>
+        <a th:href="@{'/post/delete?postId=' + ${post.id}}" class="btn btn-primary">Delete</a>
     </div>
 </div>
 </body>
