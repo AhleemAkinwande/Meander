@@ -7,9 +7,7 @@
 <nav th:replace="fragments :: navbar"></nav>
 <div class="container">
 
-    <th:block th:if="${message != null}">
-        <div th:text="${message}" class="alert alert-warning"></div>
-    </th:block>
+
 
     <div>
         <h1 class="text-center" th:text="${post.title}"></h1>
@@ -20,8 +18,15 @@
         <div class="row bg-light rounded rounded-1 mb-4 mt-3 border border-1 p-3">
         <p th:text="${post.text}"></p>
         </div>
+
+            <div th:if="${message != null}" class="alert alert-warning">
+                <span th:text="${message}"></span>
+                <span class="fs-italic">If you are the author of this post, <a th:href="@{/login}">click here</a> to log in.</span>
+            </div>
+
         <a th:href="@{'/post/edit/' + ${post.id}}" class="btn btn-primary">Edit</a>
-        <button class="btn btn-primary">Delete</button>
+        <a th:href="@{'/post/delete?postId=' + ${post.id}}" class="btn btn-danger">Delete</a>
+
     </div>
 </div>
 </body>

@@ -50,11 +50,15 @@ public class PostController {
     @GetMapping("post_single/{postId}")
     public String displayASinglePost(Model model, @PathVariable Integer postId) {
 
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User currentUser = userRepository.findByEmail(((UserDetails) principal).getUsername());
+
         Optional optPost = postRepository.findById(postId);
+
         if (!optPost.isEmpty()) {
             Post post = (Post) optPost.get();
             model.addAttribute("post", post);
-            model.addAttribute("title", "Single post");
+            model.addAttribute("title", post.getTitle());
             return "post_single";
         } else {
             return "redirect:/";
@@ -62,8 +66,27 @@ public class PostController {
     }
 
     @GetMapping("delete")
-    public String deletePost(Model model, @RequestParam(required = true) Integer postId) {
-        postRepository.deleteById(postId);
+    public String deletePost(Model model, @RequestParam(required = true) Integer postId, RedirectAttributes redirectAttributes) {
+
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User currentUser = userRepository.findByEmail(((UserDetails) principal).getUsername());
+
+        if(postId == null) {
+            return "redirect:";
+        } else {
+            Optional optPost = postRepository.findById(postId);
+            if(!optPost.isEmpty()) {
+                Post postToDelete = (Post) optPost.get();
+
+                if(postToDelete.getUser() != currentUser) {
+                    redirectAttributes.addFlashAttribute("message", "This post was created by " + postToDelete.getUser().getFirstName() + " " + postToDelete.getUser().getLastName() + ". You cannot delete it.");
+                    return "redirect:/post/post_single/" + postId;
+                } else {
+                    postRepository.deleteById(postId);
+                }
+            }
+        }
+
         return "redirect:post_list";
     }
 
@@ -140,20 +163,5 @@ public class PostController {
 
 
      return "redirect:/";
-    }
-
-
-
-    @PostMapping("delete")
-    public String renderDeleteEventForm(@RequestParam(required = false) int[] postId){
-
-        if(postId != null){
-            for (int id: postId){
-                postRepository.deleteById(id);
-                //EventData.remove(id);
-            }
-        }
-
-        return "redirect:";
     }
 }
