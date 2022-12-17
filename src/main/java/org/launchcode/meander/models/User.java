@@ -41,10 +41,7 @@ public class User {
         this.id = id;
     }
 
-    @OneToMany(mappedBy="user")
-    private final List<Post> posts = new ArrayList<>();
 
-    public int getId() {
     public String getEmail() {
         return email;
     }
