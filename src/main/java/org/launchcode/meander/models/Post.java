@@ -2,6 +2,7 @@ package org.launchcode.meander.models;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,23 +15,33 @@ public class Post {
     @GeneratedValue
     private int id;
 
-    @NotBlank(message = "Title is required.")
-    @Size(min = 5, max = 20 )
+   @NotBlank(message = "Title is required.")
+   @Size(min = 5, max = 20, message = "Title must be between 5 and 20 characters.")
     private String title;
 
-
-    @Size(min = 5, max = 100 )
+   @NotBlank(message = "Text is required.")
+   @Size(min = 5, max = 100, message = "Post must be longer than 5 characters.")
     private String text;
 
-    //still working on relationship between post and user
-//    @OneToMany(mappedBy = "post")
-//    private User user;
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    @NotNull
+    @ManyToOne
+    private User user;
 
 
 
-    public Post(String title, String postDetails) {
+
+    public Post(String title, String postDetails, User user) {
         this.title = title;
         text = postDetails;
+        this.user = user;
     }
 
     public Post() {}
