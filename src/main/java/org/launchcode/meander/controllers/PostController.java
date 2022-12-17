@@ -1,8 +1,11 @@
 package org.launchcode.meander.controllers;
 
+import org.launchcode.meander.models.User;
 import org.launchcode.meander.models.data.PostRepository;
 import org.launchcode.meander.models.Post;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
