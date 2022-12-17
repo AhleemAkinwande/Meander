@@ -37,7 +37,6 @@ public class User {
     @Column(name = "instagram", length = 80)
     private String instagram;
 
-    public Long getId() {
 
     @OneToMany(mappedBy="user")
     private final List<Post> posts = new ArrayList<>();
