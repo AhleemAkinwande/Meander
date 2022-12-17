@@ -2,6 +2,7 @@ package org.launchcode.meander.models;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,10 +23,22 @@ public class Post {
     @Size(min = 5, max = 100 )
     private String text;
 
+    public User getUser() {
+        return user;
+    }
 
-    public Post(String title, String postDetails) {
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    @NotNull
+    @ManyToOne
+    private User user;
+
+    public Post(String title, String postDetails, User user) {
         this.title = title;
         text = postDetails;
+        this.user = user;
     }
 
     public Post() {}

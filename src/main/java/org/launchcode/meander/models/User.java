@@ -109,4 +109,11 @@ public class User {
     public void setInstagram(String instagram) {
         this.instagram = instagram;
     }
+
+    @OneToMany(mappedBy="user")
+    private final List<Post> posts = new ArrayList<>();
+
+    public int getId() {
+        return id;
+    }
 }
