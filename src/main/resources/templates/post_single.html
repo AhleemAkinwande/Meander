@@ -5,12 +5,22 @@
 <body>
 
 <nav th:replace="fragments :: navbar"></nav>
-<div class="container text-center">
+<div class="container">
+
+    <th:block th:if="${message != null}">
+        <div th:text="${message}" class="alert alert-warning"></div>
+    </th:block>
 
     <div>
-        <h2 th:text="${post.title}"></h2>
+        <h1 class="text-center" th:text="${post.title}"></h1>
+        <h2 class="text-center fs-4">
+            By:
+            <span class="text-muted" th:text="|${post.user.firstName} ${post.user.lastName}|"></span>
+        </h2>
+        <div class="row bg-light rounded rounded-1 mb-4 mt-3 border border-1 p-3">
         <p th:text="${post.text}"></p>
-        <button class="btn btn-primary">Edit</button>
+        </div>
+        <a th:href="@{'/post/edit/' + ${post.id}}" class="btn btn-primary">Edit</a>
         <button class="btn btn-primary">Delete</button>
     </div>
 </div>

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.*;
@@ -64,7 +65,6 @@ public class PostController {
     public String displayPostForm(Model model){
         model.addAttribute("title", "Create Post");
 
-
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User currentUser = userRepository.findByEmail(((UserDetails)principal).getUsername());
 
@@ -80,13 +80,62 @@ public class PostController {
     public String processPost(@ModelAttribute @Valid Post post, Errors errors, Model model){
 
         if(errors.hasErrors()) {
-            model.addAttribute("title", "Errors Found");
+            model.addAttribute("title", "Failed to create post, please try again!");
             return "post_form";
         }
 
         postRepository.save(post);
         return "redirect:post_list";
     }
+
+    @GetMapping("edit/{postId}")
+    public String displayEditPostForm(Model model, @PathVariable Integer postId, RedirectAttributes redirectAttributes) {
+
+        model.addAttribute("title", "Edit a Post");
+
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User currentUser = userRepository.findByEmail(((UserDetails)principal).getUsername());
+
+        if(postId == null) {
+            return "redirect:";
+        } else {
+            Optional optPost = postRepository.findById(postId);
+            if(!optPost.isEmpty()) {
+
+                Post postToEdit = (Post) optPost.get();
+
+                if(postToEdit.getUser() != currentUser) {
+                    redirectAttributes.addFlashAttribute("message", "This post was created by " + postToEdit.getUser().getFirstName() + " " + postToEdit.getUser().getLastName() + ". You cannot edit it.");
+//
+                    return "redirect:/post/post_single/" + postId;
+                } else {
+                    model.addAttribute("post", postToEdit);
+                }
+            }
+        }
+        return "post_edit";
+    }
+
+    @PostMapping("edit/{postId}")
+    public String processEditPostForm(@ModelAttribute @Valid Post post, @PathVariable Integer postId, Model model, Errors errors) {
+
+        if(postId != null) {
+            Optional optPostToEdit = postRepository.findById(postId);
+            Post postToEdit = (Post) optPostToEdit.get();
+
+            postToEdit.setText(post.getText());
+            postToEdit.setText(post.getTitle());
+
+            postRepository.save(postToEdit);
+        } else {
+            return "redirect:/post_list";
+        }
+
+
+     return "redirect:/";
+    }
+
+
 
     @PostMapping("delete")
     public String renderDeleteEventForm(@RequestParam(required = false) int[] postId){

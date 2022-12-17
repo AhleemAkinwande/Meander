@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+
+<body>
+
+<nav th:replace="fragments :: navbar"></nav>
+
+<div class="container">
+    <div>
+        <h1 class="text-center" th:text="${title}"></h1>
+    </div>
+
+    <form method="post">
+        <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input id="title" th:field="${post.title}"  class="form-control" type="text" th:value="${post.title}"/>
+        </div>
+        <div class="mb-3">
+            <label for="text" class="form-label">Post Text</label>
+            <textarea id="text" th:field="${post.text}"  class="form-control" rows="5"  th:text="${post.text}"></textarea>
+        </div>
+        <input type="submit" value="Update Post" class="btn btn-success"/>
+        <input type="hidden" th:field="${post.user}"/>
+    </form>
+</div>
+</body>
+</html>
