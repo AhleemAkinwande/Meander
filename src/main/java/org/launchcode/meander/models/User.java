@@ -35,10 +35,6 @@ public class User {
     @Column(name = "instagram", length = 80)
     private String instagram;
 
-    public Long getId() {
-
-    @OneToMany(mappedBy="user")
-    private final List<Post> posts = new ArrayList<>();
 
     public int getId() {
 
@@ -47,10 +43,6 @@ public class User {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public List<Post> getPosts() {
-        return posts;
     }
 
     public String getEmail() {

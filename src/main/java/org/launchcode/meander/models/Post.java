@@ -22,12 +22,6 @@ public class Post {
     @Size(min = 5, max = 100 )
     private String text;
 
-    //still working on relationship between post and user
-//    @OneToMany(mappedBy = "post")
-//    private User user;
-
-
-
     public Post(String title, String postDetails) {
         this.title = title;
         text = postDetails;
