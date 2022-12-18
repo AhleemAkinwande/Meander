@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head th:replace="fragments :: head">
+</head>
+
+<body>
+
+<nav th:replace="fragments :: navbar"></nav>
+<div class="container">
+    <div class="row mb-5">
+    <h1><span class="fw-light">Destinations in</span> <span class="text-info fw-normal" th:text="${location.getCityAndStateName()}"></span></h1>
+    </div>
+    <div  th:each="post: ${posts}" class="bg-white post p-3 m-2 border border-light rounded rounded-1">
+        <h3 th:text="${post.title}"></h3>
+        <p class="mb-2 text-muted" th:text="${post.getLongPostSnippet()}"></p>
+        <hr/>
+        <a class="btn btn-outline-primary" th:href="@{'/post/post_single/' + ${post.id}}">View full post</a>
+    </div>
+
+</div>
+</body>
+</html>

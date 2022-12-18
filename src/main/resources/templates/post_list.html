@@ -22,7 +22,7 @@
          <tbody>
          <tr th:each="post: ${posts}">
             <td><a th:href="@{'post_single/' + ${post.id}}" th:text="${post.title}"></a></td>
-            <td th:text="${post.text}"></td>
+            <td th:text="${post.getShortPostSnippet()}"></td>
             <td th:text="${post.user.firstName}"></td>
          </tr>
          </tbody>
