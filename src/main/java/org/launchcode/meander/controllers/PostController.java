@@ -1,6 +1,8 @@
 package org.launchcode.meander.controllers;
 
+import org.launchcode.meander.models.Location;
 import org.launchcode.meander.models.User;
+import org.launchcode.meander.models.data.LocationRepository;
 import org.launchcode.meander.models.data.PostRepository;
 import org.launchcode.meander.models.Post;
 import org.launchcode.meander.models.data.UserRepository;
@@ -25,6 +27,9 @@ public class PostController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private LocationRepository locationRepository;
 
     @GetMapping("post_list")
 
@@ -114,7 +119,17 @@ public class PostController {
             return "post_form";
         }
 
-        postRepository.save(post);
+        // Check if location (city, state,  country) already exists to prevent duplicate entries in the location table
+
+        Location optLocation = locationRepository.findLocationByCityStateCountry(post.getLocation().getCity(),post.getLocation().getState(),post.getLocation().getCountry());
+
+        if(optLocation == null) {
+            postRepository.save(post);
+        } else {
+            post.setLocation((Location) optLocation);
+            postRepository.save(post);
+        }
+
         return "redirect:post_list";
     }
 
