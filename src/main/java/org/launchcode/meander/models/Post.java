@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -15,12 +16,16 @@ public class Post {
     @GeneratedValue
     private int id;
 
-   @NotBlank(message = "Title is required.")
-   @Size(min = 5, max = 20, message = "Title must be between 5 and 20 characters.")
-    private String title;
 
-   @NotBlank(message = "Text is required.")
-   @Size(min = 5, max = 100, message = "Post must be longer than 5 characters.")
+   @Column(length = 50, nullable=false)
+   @NotBlank(message = "Title is required.")
+   @Size(min = 5, max = 50, message = "Title must be between 5 and 50 characters.")
+   private String title;
+
+
+    @Column(length = 2000, nullable=false)
+    @NotBlank(message = "Text is required.")
+    @Size(min = 5, max = 2000, message = "Post must be longer than 5 characters and fewer than 1000 characters.")
     private String text;
 
     public User getUser() {
@@ -76,5 +81,23 @@ public class Post {
 
     public void setLocation(Location location) {
         this.location = location;
+    }
+
+    public String getShortPostSnippet() {
+        if(this.text.length() < 50) {
+            return this.text.substring(0, this.text.length());
+        } else {
+            return this.text.substring(0, 49) + "...";
+
+        }
+    }
+
+    public String getLongPostSnippet() {
+        if(this.text.length() < 150) {
+            return this.text.substring(0, this.text.length());
+        } else {
+            return this.text.substring(0, 145) + "...";
+
+        }
     }
 }

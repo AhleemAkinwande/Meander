@@ -23,7 +23,6 @@ public class Location {
     @OneToMany(mappedBy="location", cascade = CascadeType.ALL)
     private final List<Post> posts = new ArrayList<>();
 
-
     public Location(String city, String state, String country) {
         this.city = city;
         this.state = state;
@@ -60,11 +59,11 @@ public class Location {
         this.country = country;
     }
 
-    public String getLocationName(String locationName) {
+    public String getCityAndStateName() {
         if(this.state!= null) {
-            return this.city + " " + this.state + " " + this.country;
+            return this.city + ", " + this.state;
         } else {
-            return this.city + " " + this.country;
+            return this.city + ", " + this.country;
         }
     }
 }
