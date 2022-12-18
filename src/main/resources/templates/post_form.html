@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments :: head"></head>
+<head th:replace="fragments :: head">
+</head>
 
 <body>
 
@@ -24,6 +25,17 @@
             <div class="col-8">
                <input class="form-control"
                       required th:field="${post.text}" name="text" type="text"/>
+                <select class="form-control" id="country" th:field="${post.location.country}">
+                    <option value="United States">United States</option>
+                </select>
+
+                <select class="form-control" id="state" th:field="${post.location.state}">
+                </select>
+
+                <input list="city-list" class="form-control" id="city" th:field="${post.location.city}"/>
+                       <datalist id="city-list"></datalist>
+                </select>
+
                 <input type="hidden" th:field="*{user}"/>
 
             </div>
@@ -31,10 +43,13 @@
      <p class="error" th:errors="${post.title}"></p>
          <p class="error" th:errors="${post.text}"></p>
          <div>
-            <button class="btn btn-primary" type="submit">Create</button>
+            <button class="btn btn-outline-success w-100" type="submit">Create</button>
          </div>
       </div>
    </form>
 </div>
+
+<script th:src="@{/js/locations.js}" type="text/javascript"></script>
+
 </body>
 </html>
