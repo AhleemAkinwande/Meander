@@ -27,21 +27,16 @@ public class PostController {
 
     @GetMapping("post_list")
 
-    public String displayPosts(@RequestParam(required = false) Integer userId, Model model) {
-
-        if (userId == null) {
+    public String displayPosts(Model model, @PathVariable(required = false) Integer userId) {
+        if (userId != null) {
+            Optional<User> result = userRepository.findById(userId);
+            User optUser = result.get();
+            model.addAttribute("title", "Posts by: " + optUser.getFirstName() + " " + optUser.getLastName());
+            model.addAttribute("posts", optUser.getPosts());
+        } else {
             model.addAttribute("title", "All posts");
             List<Post> posts = (List<Post>) postRepository.findAll();
             model.addAttribute("posts", posts);
-        } else {
-            Optional<User> result = userRepository.findById(userId);
-            if (result.isEmpty()) {
-                model.addAttribute("title", "Invalid user ID.");
-            } else {
-                User user = result.get();
-                model.addAttribute("title", "Posts by: " + user.getFirstName() + " " + user.getLastName());
-                model.addAttribute("posts", user.getPosts());
-            }
         }
         return "post_list";
     }
