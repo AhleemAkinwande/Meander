@@ -154,7 +154,7 @@ public class PostController {
             Post postToEdit = (Post) optPostToEdit.get();
 
             postToEdit.setText(post.getText());
-            postToEdit.setText(post.getTitle());
+            postToEdit.setTitle(post.getTitle());
 
             postRepository.save(postToEdit);
         } else {
@@ -162,6 +162,6 @@ public class PostController {
         }
 
 
-     return "redirect:/";
+     return "redirect:/post/post_single/" + postId;
     }
 }
