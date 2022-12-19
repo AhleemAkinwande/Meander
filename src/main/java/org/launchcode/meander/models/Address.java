@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 public class Address {
-
+    //TODO: fix relationship between Address and Location (location_id is not currently being recorded upon creation of new address)
     @GeneratedValue
     @Id
     private int id;
