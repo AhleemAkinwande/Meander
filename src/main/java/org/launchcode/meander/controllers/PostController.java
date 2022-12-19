@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @Controller
@@ -109,6 +111,11 @@ public class PostController {
     @PostMapping("create")
     public String processPost(@ModelAttribute @Valid Post post, Errors errors, Model model) {
 
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("uuuu/MM/dd");
+        LocalDate localDate = LocalDate.now();
+
+        String date = dtf.format(localDate);
+
         if(errors.hasErrors()) {
             model.addAttribute("title", "Failed to create post, please try again!");
             return "post_form";
@@ -119,8 +126,10 @@ public class PostController {
         Location optLocation = locationRepository.findLocationByCityStateCountry(post.getLocation().getCity(),post.getLocation().getState(),post.getLocation().getCountry());
 
         if(optLocation == null) {
+            post.setDate(date);
             postRepository.save(post);
         } else {
+            post.setDate(date);
             post.setLocation((Location) optLocation);
             postRepository.save(post);
         }
@@ -149,6 +158,7 @@ public class PostController {
 //
                     return "redirect:/post/post_single/" + postId;
                 } else {
+
                     model.addAttribute("post", postToEdit);
                 }
             }
@@ -157,7 +167,7 @@ public class PostController {
     }
 
     @PostMapping("edit/{postId}")
-    public String processEditPostForm(@ModelAttribute @Valid Post post, @PathVariable Integer postId, Model model, Errors errors) {
+    public String processEditPostForm(@ModelAttribute @Valid Post post, @PathVariable Integer postId, Model model, Errors errors, RedirectAttributes redirectAttributes) {
 
         if(postId != null) {
             Optional optPostToEdit = postRepository.findById(postId);
@@ -165,6 +175,8 @@ public class PostController {
 
             postToEdit.setText(post.getText());
             postToEdit.setTitle(post.getTitle());
+
+            redirectAttributes.addFlashAttribute("success", "Post updated successfully!");
 
             postRepository.save(postToEdit);
         } else {

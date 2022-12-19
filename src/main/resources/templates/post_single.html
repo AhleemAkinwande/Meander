@@ -5,17 +5,40 @@
 <body>
 
 <nav th:replace="fragments :: navbar"></nav>
-<div class="container">
+
 
 
 
     <div>
-        <h1 class="text-center" th:text="${post.title}"></h1>
-        <h2 class="text-center fs-4">
-            By:
-            <span class="text-muted" th:text="|${post.user.firstName} ${post.user.lastName}|"></span>
-        </h2>
+
+        <div class="w-100" style="background-color: #064f7d; background-image: linear-gradient(117deg, #064f7d 0%, #000000 100%);">
+            <div class="row p-5">
+                <div class="col text-white">
+                    <h1 th:text="${post.title}"></h1>
+                    <h2 class="fs-4">
+                        <span class="fs-italic">Submitted by</span>
+                        <span class="text-white fw-bold" th:text="|${post.user.firstName} ${post.user.lastName}|"></span> on <span th:text="${post.date}"></span>
+                    </h2>
+                </div>
+
+                <div class="col fs-4 text-white text-end">
+                    <p>📍 <span th:text="${post.address.streetAddress}"></span></p>
+                    <p><span th:text="|${post.location.getCityAndStateName()}, ${post.address.zipCode}|"></span></p>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="container">
+            <div th:if="${success != null}" class="alert alert-success">
+                <span th:text="${success}"></span>
+            </div>
         <div class="row bg-light rounded rounded-1 mb-4 mt-3 border border-1 p-3">
+            <div th:if="${success != null}" class="alert alert-success">
+                <span th:text="${success}"></span>
+            </div>
         <p th:text="${post.text}"></p>
         </div>
 
