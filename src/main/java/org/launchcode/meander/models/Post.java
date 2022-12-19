@@ -4,7 +4,9 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.time.LocalDate;
 
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -28,6 +30,11 @@ public class Post {
     @Size(min = 5, max = 2000, message = "Post must be longer than 5 characters and fewer than 1000 characters.")
     private String text;
 
+
+
+    private String date;
+    //TODO: Store date as Date
+
     public User getUser() {
         return user;
     }
@@ -46,12 +53,14 @@ public class Post {
     @OneToOne(cascade = CascadeType.ALL)
     private Address address;
 
-    public Post(String title, String postDetails, User user, Location location, Address address) {
+      public Post(String title, String postDetails, User user, Location location, Address address, String date) {
+
         this.title = title;
         text = postDetails;
         this.user = user;
         this.location = location;
         this.address = address;
+        this.date = date;
     }
 
     public Post() {}
@@ -75,6 +84,14 @@ public class Post {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public Location getLocation() {
