@@ -27,7 +27,7 @@ public class PostController {
 
     @GetMapping("post_list")
 
-    public String displayPosts(Model model, @PathVariable(required = false) Integer userId) {
+    public String displayPosts(Model model, @RequestParam(required = false) Integer userId) {
         if (userId != null) {
             Optional<User> result = userRepository.findById(userId);
             User optUser = result.get();

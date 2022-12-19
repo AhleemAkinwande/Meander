@@ -33,7 +33,7 @@
                         <p class="text-muted mb-4" th:text="${user.location}"></p>
                         <div class="d-flex justify-content-center mb-2">
                            <a th:href="@{/user-edit}"><button type="button" class="btn btn-primary">Edit</button></a>
-                           <a th:href="@{'/post/post_list/' + ${user.id}}"><button type="button" class="btn btn-outline-primary ms-1">My Posts</button></a>
+                           <a th:href="@{'/post/post_list?userId=' + ${user.id}}"><button type="button" class="btn btn-outline-primary ms-1">My Posts</button></a>
                         </div>
                      </div>
                   </div>
