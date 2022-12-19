@@ -8,7 +8,7 @@ window.addEventListener("DOMContentLoaded", function() {
                          .then(res => res.json())
                          .then(data => {
                              const states = data.data.states.map(i => i.name).sort();
-                             document.querySelector("#state").innerHTML = states.map(state => `<option value='${state}'>${state}</option>`).join("")
+                             document.querySelector("#state").innerHTML = `<option selected disabled>Select a state</option>` + states.map(state => `<option value='${state}'>${state}</option>`).join("")
 
 
                         document.querySelector("#state").addEventListener("change", function(e) {

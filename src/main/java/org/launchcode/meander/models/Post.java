@@ -43,13 +43,15 @@ public class Post {
     @ManyToOne(cascade = CascadeType.ALL)
     private Location location;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    private Address address;
 
-
-    public Post(String title, String postDetails, User user, Location location) {
+    public Post(String title, String postDetails, User user, Location location, Address address) {
         this.title = title;
         text = postDetails;
         this.user = user;
         this.location = location;
+        this.address = address;
     }
 
     public Post() {}
@@ -81,6 +83,14 @@ public class Post {
 
     public void setLocation(Location location) {
         this.location = location;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     public String getShortPostSnippet() {

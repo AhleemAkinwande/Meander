@@ -21,20 +21,29 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" th:href="@{/}">Home</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/login}">Log In</a>
+                <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <a class="nav-link " aria-current="page" th:href="@{/post/create}">Add a Place</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/register}">Register</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/post/post_list}">Browse Posts</a>
+                    <a class="nav-link" th:href="@{/post/post_list}">Browse Places</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" th:href="@{/users}">Browse Users</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" th:href="@{/search/location}">Browse Locations</a>
+                </li>
+                <li class="nav-item" sec:authorize="isAuthenticated()">
                     <a class="nav-link" th:href="@{/user-profile}">My Profile</a>
+                </li>
+                <li class="nav-item" sec:authorize="!isAuthenticated()">
+                    <a class="nav-link" th:href="@{/login}">Log In</a>
+                </li>
+                <li class="nav-item" sec:authorize="!isAuthenticated()">
+                    <a class="nav-link" th:href="@{/register}">Register</a>
+                </li>
+                <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <a class="nav-link" th:href="@{/logout}">Log Out</a>
                 </li>
             </ul>
             <form class="d-flex w-25" action="/search" method="post" role="search">
