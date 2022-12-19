@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+
+<body>
+
+<nav th:replace="fragments :: navbar"></nav>
+
+<div th:if="${message==null}" class="container">
+    <div class="row mb-5">
+        <h1><span class="fw-light">#</span> <span class="text-info fw-normal" th:text="${title}"></span></h1>
+        <h4> <span class="fs-italic fw-light" th:text="${description}"></span></h4>
+    </div>
+    <div  th:each="post: ${posts}" class="bg-white post p-3 m-2 border border-light rounded rounded-1">
+        <h3 th:text="${post.title}"></h3>
+        <p class="mb-2 text-muted" th:text="${post.getLongPostSnippet()}"></p>
+        <hr/>
+        <a class="btn btn-outline-primary" th:href="@{'/post/post_single/' + ${post.id}}">View full post</a>
+    </div>
+</div>
+
+<div th:if="${message!=null}"  class="container">
+    <div th:text="${message}" class="alert alert-warning"></div>
+</div>
+
+
+
+</body>
+</html>
