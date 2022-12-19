@@ -23,6 +23,9 @@ public class Location {
     @OneToMany(mappedBy="location", cascade = CascadeType.ALL)
     private final List<Post> posts = new ArrayList<>();
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "location")
+    private final List<Address> addresses = new ArrayList<>();
+
     public Location(String city, String state, String country) {
         this.city = city;
         this.state = state;

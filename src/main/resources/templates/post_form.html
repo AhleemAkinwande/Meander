@@ -52,7 +52,10 @@
 
           <div class="input-group mb-5">
               <span class="input-group-text">Street Address</span>
-              <input type="text" autocomplete="street-address" class="form-control" id="address">
+              <input type="text" autocomplete="street-address" th:field="${post.address.streetAddress}" class="form-control" id="address">
+
+              <span class="input-group-text">Zip Code</span>
+              <input type="text" autocomplete="postal-code" th:field="${post.address.zipCode}" class="form-control" id="zipcode">
           </div>
 
          </div>
