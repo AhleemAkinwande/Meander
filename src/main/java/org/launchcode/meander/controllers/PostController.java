@@ -1,5 +1,6 @@
 package org.launchcode.meander.controllers;
 
+import org.launchcode.meander.models.ActivityType;
 import org.launchcode.meander.models.Location;
 import org.launchcode.meander.models.User;
 import org.launchcode.meander.models.data.LocationRepository;
@@ -106,6 +107,7 @@ public class PostController {
         User currentUser = userRepository.findByEmail(((UserDetails) principal).getUsername());
 
         Post post = new Post();
+        model.addAttribute("activities", ActivityType.values());
         post.setUser(currentUser);
 
         model.addAttribute(post);
