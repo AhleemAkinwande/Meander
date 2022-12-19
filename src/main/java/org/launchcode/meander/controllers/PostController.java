@@ -98,7 +98,7 @@ public class PostController {
 
     @GetMapping("create")
     public String displayPostForm(Model model) {
-        model.addAttribute("title", "Create Post");
+        model.addAttribute("title", "Add a Place");
 
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User currentUser = userRepository.findByEmail(((UserDetails) principal).getUsername());
