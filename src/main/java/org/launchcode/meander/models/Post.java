@@ -30,9 +30,6 @@ public class Post {
     @Size(min = 5, max = 2000, message = "Post must be longer than 5 characters and fewer than 1000 characters.")
     private String text;
 
-    @ElementCollection(targetClass = ActivityType.class)
-    @Enumerated(EnumType.STRING)
-    private List<ActivityType> activityType;
 
 
     private String date;
@@ -56,20 +53,11 @@ public class Post {
     @OneToOne(cascade = CascadeType.ALL)
     private Address address;
 
-    public List<ActivityType> getActivityType() {
-        return activityType;
-    }
-
-    public void setActivityType(List<ActivityType> activityType) {
-        this.activityType = activityType;
-    }
-
-    public Post(String title, String postDetails, User user, List<ActivityType> activityType, Location location, Address address, String date) {
+      public Post(String title, String postDetails, User user, Location location, Address address, String date) {
 
         this.title = title;
         text = postDetails;
         this.user = user;
-        this.activityType = activityType;
         this.location = location;
         this.address = address;
         this.date = date;
