@@ -60,6 +60,15 @@
           </div>
 
          </div>
+
+       <div class="mb-3">
+       <label class="form-label fw-bold d-block">Select one or more activity types:</label>
+       <select class="form-control" id="select2" multiple th:field="*{activityType}">
+           <option th:each="activity : ${activities}" th:value="${activity}" th:text="${activity.getActivityHashtag()}"></option>
+       </select>
+           </div>
+
+
      <p class="error" th:errors="${post.title}"></p>
          <p class="error" th:errors="${post.text}"></p>
          <div>
@@ -71,6 +80,7 @@
 
 <script th:src="@{/js/locations.js}" type="text/javascript"></script>
 <script th:src="@{/js/wordcount.js}" type="text/javascript"></script>
+<script th:src="@{/js/select.js}" type="text/javascript"></script>
 
 </body>
 </html>

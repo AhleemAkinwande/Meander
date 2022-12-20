@@ -1,5 +1,6 @@
 package org.launchcode.meander.controllers;
 
+import org.launchcode.meander.models.ActivityType;
 import org.launchcode.meander.models.Location;
 import org.launchcode.meander.models.User;
 import org.launchcode.meander.models.data.LocationRepository;
@@ -102,7 +103,7 @@ public class PostController {
 
         Post post = new Post();
         post.setUser(currentUser);
-
+        model.addAttribute("activities", ActivityType.values());
         model.addAttribute(post);
 
         return "post_form";
