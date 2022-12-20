@@ -51,7 +51,7 @@
                 <input type="hidden" th:field="*{date}" readonly="readonly"/>
           </div>
 
-          <div class="input-group mb-3">
+          <div class="input-group mb-5">
               <span class="input-group-text">Street Address</span>
               <input type="text" autocomplete="street-address" th:field="${post.address.streetAddress}" class="form-control" id="address">
 
@@ -59,15 +59,7 @@
               <input type="text" autocomplete="postal-code" th:field="${post.address.zipCode}" class="form-control" id="zipcode">
           </div>
 
-
-          <label class="form-label fw-bold d-block">Select one or more activity types:</label>
-          <select class="form-control" id="select2" multiple th:field="*{activityType}">
-              <option th:each="activity : ${activities}" th:value="${activity}" th:text="${activity.getActivityHashtag()}"></option>
-          </select>
-
-
          </div>
-
      <p class="error" th:errors="${post.title}"></p>
          <p class="error" th:errors="${post.text}"></p>
          <div>
@@ -79,7 +71,6 @@
 
 <script th:src="@{/js/locations.js}" type="text/javascript"></script>
 <script th:src="@{/js/wordcount.js}" type="text/javascript"></script>
-<script th:src="@{/js/select.js}" type="text/javascript"></script>
 
 </body>
 </html>
