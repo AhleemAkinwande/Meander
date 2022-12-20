@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head th:replace="fragments :: head">
+</head>
+
+<body>
+
+<nav th:replace="fragments :: navbar"></nav>
+
+
+
+<div class="w-100" style="background-color: #064f7d; background-image: linear-gradient(117deg, #064f7d 0%, #000000 100%);">
+    <div class="row p-5">
+        <div class="col text-white"><h2>Search Destinations By Activity</h2></div>
+
+        <div class="col">
+            <p class="text-white text-end">
+                <span class="badge bg-success" th:text="${activities.size()}"></span>
+                activities currently available
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="mb-3 bg-white border border-light border-3 p-4 rounded rounded-1 ">
+
+    <ul>
+        <li th:each="key : ${activities.keySet()}">
+            <a th:href="@{'/search/activity/' + ${key}}" th:text="${key}"></a>
+        </li>
+    </ul>
+</div>
+
+
+</body>
+</html>
