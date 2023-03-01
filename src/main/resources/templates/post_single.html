@@ -11,9 +11,11 @@
 
     <div>
         <h1 class="text-center" th:text="${post.title}"></h1>
+        <h1 class="text-center"><img th:src="@{'/resources/' + ${post.photo}}"   alt="image" style="width: 300px;"></h1>
+
         <h2 class="text-center fs-4">
             By:
-            <span class="text-muted" th:text="|${post.user.firstName} ${post.user.lastName}|"></span>
+            <span class="text-muted" th:text="${post.user.firstName}+' '+ ${post.user.lastName}|"></span>
         </h2>
         <div class="row bg-light rounded rounded-1 mb-4 mt-3 border border-1 p-3">
         <p th:text="${post.text}"></p>

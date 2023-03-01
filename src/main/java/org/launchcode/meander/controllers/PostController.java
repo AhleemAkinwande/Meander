@@ -13,9 +13,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 
 @Controller
@@ -112,13 +117,28 @@ public class PostController {
     }
 
     @PostMapping("create")
-    public String processPost(@ModelAttribute @Valid Post post, Errors errors, Model model) {
+    public String processPost(@ModelAttribute @Valid Post post, Errors errors, @RequestParam(required = false, name = "file") MultipartFile image, Model model) throws IOException {
 
         if(errors.hasErrors()) {
             model.addAttribute("title", "Failed to create post, please try again!");
             return "post_form";
         }
 
+        if(!image.isEmpty()){
+//            Path imageDirectory = Paths.get("src//main//resources//static/image");
+//            String imgPath = imageDirectory.toFile().getAbsolutePath();
+
+            String imgPath = "C://Meander//resources";
+            try {
+                byte[] bytesImg = image.getBytes();
+                Path routImg = Paths.get(imgPath +"//"+ image.getOriginalFilename());
+                Files.write(routImg, bytesImg);
+
+                post.setPhoto(image.getOriginalFilename());
+            } catch (IOException except){
+                except.printStackTrace();
+            }
+        }
         // Check if location (city, state,  country) already exists to prevent duplicate entries in the location table
 
         Location optLocation = locationRepository.findLocationByCityStateCountry(post.getLocation().getCity(),post.getLocation().getState(),post.getLocation().getCountry());

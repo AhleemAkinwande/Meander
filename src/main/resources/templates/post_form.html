@@ -10,7 +10,7 @@
    <div class="mb-6">
       <h1 th:text="${title}" class="text-center"></h1>
    </div>
-   <form method="post" th:action="@{/post/create}" th:object="${post}">
+   <form method="post" th:action="@{/post/create}" th:object="${post}" enctype="multipart/form-data">
       <div class="m-3">
          <div class="form-group row mb-5">
             <label class="form-label fw-bold">What is this place called?</label>
@@ -18,6 +18,11 @@
                <input class="form-control" required th:field="${post.title}" name="title" type="text"/>
 
          </div>
+
+          <div class="input-group mb-5">
+              <span class="input-group-text">Image</span>
+              <input type="file" name="file" class="form-control" id="image">
+          </div>
 
          <div class="form-group row mb-5">
             <label class="form-label fw-bold">Write a description of this place (limit 1000 characters): </label>

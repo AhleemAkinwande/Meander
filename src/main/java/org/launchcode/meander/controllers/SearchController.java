@@ -13,7 +13,7 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping("search")
-public class SearchController {
+public class  SearchController {
 
     @Autowired
     private LocationRepository locationRepository;

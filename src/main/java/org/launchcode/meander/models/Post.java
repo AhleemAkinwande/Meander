@@ -46,12 +46,23 @@ public class Post {
     @OneToOne(cascade = CascadeType.ALL)
     private Address address;
 
+    private String photo;
+
     public Post(String title, String postDetails, User user, Location location, Address address) {
         this.title = title;
         text = postDetails;
         this.user = user;
         this.location = location;
         this.address = address;
+    }
+
+    public Post(String title, String postDetails, User user, Location location, Address address, String photo) {
+        this.title = title;
+        text = postDetails;
+        this.user = user;
+        this.location = location;
+        this.address = address;
+        this.photo = photo;
     }
 
     public Post() {}
@@ -91,6 +102,14 @@ public class Post {
 
     public void setAddress(Address address) {
         this.address = address;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 
     public String getShortPostSnippet() {
